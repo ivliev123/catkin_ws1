@@ -1,0 +1,9 @@
+<launch>
+
+  <!-- joystick node -->
+  <node pkg="joy" type="joy_node" name="js0" />
+
+  <!-- node to subscribe to /joy and publish /edumip/cmd message -->
+  <node pkg="edumip_ros_joy" type="edumip_ros_joy_node" name="edumip_ros_joy_node"/>
+
+</launch>

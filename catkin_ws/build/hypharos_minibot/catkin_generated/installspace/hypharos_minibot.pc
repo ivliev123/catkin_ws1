@@ -1,8 +1,0 @@
-prefix=/home/ivliev/catkin_ws/install
-
-Name: hypharos_minibot
-Description: Description of hypharos_minibot
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ivliev/catkin_ws/install/lib 
-Requires: 
