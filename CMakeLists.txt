@@ -1,23 +1,24 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(edumip_ros_joy)
+project(hypharos_minibot)
+
+## Compile as C++11, supported in ROS Kinetic and newer
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  joy
+  costmap_2d
+  dynamic_reconfigure
+  geometry_msgs
+  message_generation
+  move_base
   roscpp
   rospy
-  message_generation
   std_msgs
-  geometry_msgs
+  tf
+  visualization_msgs
 )
-
-add_message_files(DIRECTORY msg
-   FILES
-   centroid.msg
- )
-
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -60,10 +61,11 @@ add_message_files(DIRECTORY msg
 # )
 
 ## Generate services in the 'srv' folder
-add_service_files(
-   FILES
-   stm_command_float.srv
-)
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -75,7 +77,7 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs
+#   geometry_msgs#   std_msgs#   visualization_msgs
 # )
 
 ################################################
@@ -103,14 +105,14 @@ add_service_files(
 ###################################
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
+## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES edumip_ros_joy
-CATKIN_DEPENDS joy roscpp std_msgs message_runtime
+#  LIBRARIES hypharos_minibot
+#  CATKIN_DEPENDS costmap_2d dynamic_reconfigure geometry_msgs message_generation move_base roscpp rospy std_msgs tf visualization_msgs
 #  DEPENDS system_lib
 )
 
@@ -120,32 +122,40 @@ CATKIN_DEPENDS joy roscpp std_msgs message_runtime
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
 include_directories(
+# include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(edumip_ros_joy
-#   src/${PROJECT_NAME}/edumip_ros_joy.cpp
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/hypharos_minibot.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-## add_dependencies(edumip_ros_joy ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(edumip_ros_joy_node src/edumip_ros_joy_node.cpp)
+## With catkin_make all packages are built within a single CMake context
+## The recommended prefix ensures that target names across packages don't collide
+# add_executable(${PROJECT_NAME}_node src/hypharos_minibot_node.cpp)
+
+## Rename C++ executable without prefix
+## The above recommended prefix causes long target names, the following renames the
+## target back to the shorter version for ease of user use
+## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
+# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(edumip_ros_joy_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(edumip_ros_joy_node
-   ${catkin_LIBRARIES}
- )
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -162,11 +172,11 @@ target_link_libraries(edumip_ros_joy_node
 # )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS edumip_ros_joy_node
-   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -176,18 +186,18 @@ install(TARGETS edumip_ros_joy_node
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-install(FILES
-    launch/edumip_ros_joy.launch
+# install(FILES
+#   # myfile1
 #   # myfile2
-   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
- 
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+
 #############
 ## Testing ##
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_edumip_ros_joy.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_hypharos_minibot.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -1,6 +1,0 @@
-<launch>
-
-  <!-- joystick node -->
-  <node pkg="joy" type="joy_node" name="$(anon joy_node)" />
-
-</launch>
