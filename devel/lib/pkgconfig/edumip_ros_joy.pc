@@ -1,0 +1,8 @@
+prefix=/home/ivliev/catkin_ws/devel
+
+Name: edumip_ros_joy
+Description: Description of edumip_ros_joy
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ivliev/catkin_ws/devel/lib 
+Requires: joy roscpp std_msgs message_runtime

@@ -1,0 +1,2 @@
+edumip_ros_joy:hypharos_minibot:ydlidar
+-DCATKIN_DEVEL_PREFIX=/home/ivliev/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ivliev/catkin_ws/install -G Unix Makefiles
